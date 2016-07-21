@@ -15,6 +15,7 @@ import java.util.Random;
  */
 public class NumberView extends View {
     private int value = 0;
+    private int score = 0;
     private int width = 0,height = 0;
 
     public void setValue(int value){
@@ -30,21 +31,25 @@ public class NumberView extends View {
     }
     public void clearValue(){
         setValue(0);
+        score = 0;
     }
 
-    public boolean tryEat(NumberView view){
+    public void setScore(){
+
+    }
+    public int tryEat(NumberView view){
+        int resultScore = 0;
         if(value == 0){
             setValue(view.getValue());
+            score = view.score;
             view.clearValue();
         }else if(this.equals(view)) {
-            setValue(value+1);
+            setValue(value + 1);
             view.clearValue();
-            return true;
-        }else if(!view.isEmpty()){
-            return true;
+            return (int) Math.pow(2,value);
         }
 
-        return false;
+        return 0;
     }
     public int getValue(){
         return value;
@@ -89,11 +94,11 @@ public class NumberView extends View {
             Paint paint2 = new Paint();
             paint2.setColor(0xff000000);
             if(x<100){
-                paint2.setTextSize(width/2);
+                paint2.setTextSize(width / 2);
             }else if(x > 100 && x < 1000){
                 paint2.setTextSize(width /3);
             }else{
-                paint2.setTextSize(width/4);
+                paint2.setTextSize(width / 4);
             }
             canvas.drawText(String.valueOf(x),width*2/5,height*3/5,paint2);
         }

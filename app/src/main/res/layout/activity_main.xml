@@ -13,10 +13,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </com.shewim.game.demo.NumberLayout>
+
+    <TextView
+        android:id="@+id/text_history_score"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/number_layout"
+        android:text="最高分数：0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/text_score"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/text_history_score"
+        android:layout_below="@+id/number_layout"
+        android:text="分数：0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/btn_restart"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
         android:layout_below="@+id/number_layout"
         android:text="重新开始"
         android:layout_width="wrap_content"

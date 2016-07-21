@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
     private GestureDetector detector;
     private NumberLayout numberLayout;
+    private TextView mTextScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +20,19 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         detector = new GestureDetector(this,this);
         numberLayout = ((NumberLayout) findViewById(R.id.number_layout));
         View btnRestart = findViewById(R.id.btn_restart);
+        mTextScore = (TextView) findViewById(R.id.text_score);
+        final TextView mTextHistoryScore = (TextView) findViewById(R.id.text_history_score);
+        numberLayout.setOnGameOverListener(new NumberLayout.OnGameOverListener(){
+            @Override
+            public void OnGameOver() {
+
+            }
+        });
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 numberLayout.reStart();
+                mTextScore.setText(String.format("分数：%d", 0));
             }
         });
     }
@@ -58,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        numberLayout.onGo(e1, e2, velocityX, velocityY);
+        mTextScore.setText(String.format("分数：%d",numberLayout.onGo(e1, e2, velocityX, velocityY) ));
         return false;
     }
 }

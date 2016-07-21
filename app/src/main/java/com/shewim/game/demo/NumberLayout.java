@@ -19,6 +19,7 @@ import java.util.Random;
  */
 public class NumberLayout extends LinearLayout {
     private static final int LAYOUT_SIZE = 4;
+    int countScore = 0;
     private NumberView [][] numberViews = new NumberView[LAYOUT_SIZE][LAYOUT_SIZE];
 
     private boolean gameOver;
@@ -47,6 +48,7 @@ public class NumberLayout extends LinearLayout {
 
     public void reStart(){
         emptyList.clear();
+        countScore = 0;
         for (int i = 0; i < LAYOUT_SIZE* LAYOUT_SIZE;i++){
             numberViews[i/LAYOUT_SIZE][i%LAYOUT_SIZE].clearValue();
             emptyList.add(i);
@@ -97,13 +99,13 @@ public class NumberLayout extends LinearLayout {
         }
     }
 
-    public boolean onGo(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY){
+    public int onGo(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY){
         if(gameOver){
-            return false;
+            return countScore;
         }
         float x = e2.getX() - e1.getX();
         float y = e2.getY() - e1.getY();
-        boolean flag = false;
+        boolean flag = false,isContinueLoop = true;
         int x1,y1,x2,y2;
         for(int i=0;i< LAYOUT_SIZE;i++) {
             label:for(int n = 0;n < LAYOUT_SIZE - 1;n++){
@@ -138,7 +140,12 @@ public class NumberLayout extends LinearLayout {
                         flag = true;
                         emptyList.add(x2*LAYOUT_SIZE + y2);
                     }
-                    if (numberViews[x1][y1].tryEat(numberViews[x2][y2])){
+                    if (!numberViews[x1][y1].isEmpty()&&!numberViews[x2][y2].isEmpty()){
+                        isContinueLoop = false;
+                    }
+                    countScore += numberViews[x1][y1].tryEat(numberViews[x2][y2]);
+                    if(!isContinueLoop){
+                        isContinueLoop = true;
                         continue label;
                     }
                 }
@@ -151,10 +158,19 @@ public class NumberLayout extends LinearLayout {
         if(emptyList.size() <= 0 && isGameOver()){
             Toast.makeText(getContext(),"Game Over",Toast.LENGTH_LONG).show();
             gameOver = true;
+            if(onGameOverListener!= null){
+                onGameOverListener.OnGameOver();
+            }
         }
-        return false;
+        return countScore;
     }
-
+    private OnGameOverListener onGameOverListener;
+    public void setOnGameOverListener(OnGameOverListener listener){
+        onGameOverListener = listener;
+    }
+    public interface OnGameOverListener{
+        void OnGameOver();
+    }
     private boolean isGameOver() {
         for(int i= 0;i < LAYOUT_SIZE ;i++){
             for(int j = 0;j < LAYOUT_SIZE;j++){
