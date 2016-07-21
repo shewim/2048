@@ -15,7 +15,6 @@ import java.util.Random;
  */
 public class NumberView extends View {
     private int value = 0;
-    private int score = 0;
     private int width = 0,height = 0;
 
     public void setValue(int value){
@@ -31,7 +30,6 @@ public class NumberView extends View {
     }
     public void clearValue(){
         setValue(0);
-        score = 0;
     }
 
     public void setScore(){
@@ -41,7 +39,6 @@ public class NumberView extends View {
         int resultScore = 0;
         if(value == 0){
             setValue(view.getValue());
-            score = view.score;
             view.clearValue();
         }else if(this.equals(view)) {
             setValue(value + 1);

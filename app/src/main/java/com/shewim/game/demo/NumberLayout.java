@@ -159,9 +159,12 @@ public class NumberLayout extends LinearLayout {
             Toast.makeText(getContext(),"Game Over",Toast.LENGTH_LONG).show();
             gameOver = true;
             if(onGameOverListener!= null){
-                onGameOverListener.OnGameOver();
+                onGameOverListener.OnGameOver(countScore);
             }
         }
+        return countScore;
+    }
+    public int getCountScore(){
         return countScore;
     }
     private OnGameOverListener onGameOverListener;
@@ -169,7 +172,7 @@ public class NumberLayout extends LinearLayout {
         onGameOverListener = listener;
     }
     public interface OnGameOverListener{
-        void OnGameOver();
+        void OnGameOver(int score);
     }
     private boolean isGameOver() {
         for(int i= 0;i < LAYOUT_SIZE ;i++){
