@@ -22,7 +22,7 @@ public class NumberLayout extends LinearLayout {
     int countScore = 0;
     private NumberView [][] numberViews = new NumberView[LAYOUT_SIZE][LAYOUT_SIZE];
 
-    private boolean gameOver;
+    private boolean gameOver = false;
     private ArrayList<Integer> emptyList;
 
     public NumberLayout(Context context) {
@@ -48,6 +48,7 @@ public class NumberLayout extends LinearLayout {
 
     public void reStart(){
         emptyList.clear();
+        gameOver = false;
         countScore = 0;
         for (int i = 0; i < LAYOUT_SIZE* LAYOUT_SIZE;i++){
             numberViews[i/LAYOUT_SIZE][i%LAYOUT_SIZE].clearValue();
