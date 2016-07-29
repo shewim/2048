@@ -24,6 +24,8 @@ public class NumberLayout extends LinearLayout {
 
     private boolean gameOver = false;
     private ArrayList<Integer> emptyList;
+    private GestureDetector detector;
+    private onScoreListener mListener;
 
     public NumberLayout(Context context) {
         super(context);
@@ -57,7 +59,49 @@ public class NumberLayout extends LinearLayout {
         initARandomView();
         initARandomView();
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return detector.onTouchEvent(event);
+    }
+
     private void init(Context context) {
+
+        detector = new GestureDetector(context, new GestureDetector.OnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public void onShowPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                return true;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                int score = onGo(e1,e2,velocityX,velocityY);
+                if(mListener != null){
+                    mListener.onScore(score);
+                }
+                return false;
+            }
+        });
         WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
 
         int width = wm.getDefaultDisplay().getWidth();
@@ -207,4 +251,11 @@ public class NumberLayout extends LinearLayout {
         return 0;
     }
 
+    public void setOnScoreListener(onScoreListener listener){
+        mListener = listener;
+    }
+
+    public interface onScoreListener{
+        void onScore(int score);
+    }
 }

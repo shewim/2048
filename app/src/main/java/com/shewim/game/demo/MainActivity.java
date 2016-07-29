@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
+public class MainActivity extends AppCompatActivity{
     private static final String SHARED_PREFERENCES_NAME = "com.shewim.2018.xml";
     private static final String SP_KEY_HISTORY_SCORE = "sp_key_history_score";
     private GestureDetector detector;
@@ -33,9 +33,14 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 //        btnRestart = findViewById(R.id.btn_restart);
 //        mTextScore = (TextView) findViewById(R.id.text_score);
 //        mTextHistoryScore = (TextView) findViewById(R.id.text_history_score);
-        detector = new GestureDetector(this,this);
         highScore = getHistoryScore();
         mTextHistoryScore.setText(String.format("最高分数：%d",highScore ));
+        numberLayout.setOnScoreListener(new NumberLayout.onScoreListener() {
+            @Override
+            public void onScore(int score) {
+                mTextScore.setText(String.format("分数：%d",score));
+            }
+        });
         numberLayout.setOnGameOverListener(new NumberLayout.OnGameOverListener(){
             @Override
             public void OnGameOver(int score) {
@@ -155,39 +160,4 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         editor.apply();
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return detector.onTouchEvent(event);
-    }
-
-    @Override
-    public boolean onDown(MotionEvent e) {
-        return false;
-    }
-
-    @Override
-    public void onShowPress(MotionEvent e) {
-
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
-        return false;
-    }
-
-    @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        return false;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent e) {
-
-    }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        mTextScore.setText(String.format("分数：%d",numberLayout.onGo(e1, e2, velocityX, velocityY) ));
-        return false;
-    }
 }
