@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="number_layout" type="id">2222</item>
+    <item name="btn_restart" type="id">222</item>
+    <item name="text_score" type="id">23222</item>
+    <item name="text_history_score" type="id">22422</item>
+</resources>

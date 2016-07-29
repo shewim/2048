@@ -11,7 +11,7 @@ import android.view.View;
 import java.util.Random;
 
 /**
- * Created by TTWing on 2016/7/21.
+ * Created by shewim on 2016/7/21.
  */
 public class NumberView extends View {
     private int value = 0;

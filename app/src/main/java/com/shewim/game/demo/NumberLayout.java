@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by TTWing on 2016/7/21.
+ * Created by shewim on 2016/7/21.
  */
 public class NumberLayout extends LinearLayout {
     private static final int LAYOUT_SIZE = 4;
@@ -127,6 +127,12 @@ public class NumberLayout extends LinearLayout {
                             x1 = LAYOUT_SIZE - 1 - n;y1=i;x2=LAYOUT_SIZE - 1 - m;y2=i;
                         }
                     }
+
+                    //空      不空
+                    //不空    空
+                    //不空    不空   相等
+                    //              不相等
+
                     if(numberViews[x1][y1].isEmpty()&&!numberViews[x2][y2].isEmpty()){
                         flag = true;
                         for(int j = 0; j < emptyList.size();j++) {
