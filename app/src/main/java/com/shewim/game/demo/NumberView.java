@@ -35,19 +35,7 @@ public class NumberView extends View {
     public void setScore(){
 
     }
-    public int tryEat(NumberView view){
-        int resultScore = 0;
-        if(value == 0){
-            setValue(view.getValue());
-            view.clearValue();
-        }else if(this.equals(view)) {
-            setValue(value + 1);
-            view.clearValue();
-            return (int) Math.pow(2,value);
-        }
 
-        return 0;
-    }
     public int getValue(){
         return value;
     }

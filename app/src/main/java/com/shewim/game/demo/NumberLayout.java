@@ -150,7 +150,7 @@ public class NumberLayout extends LinearLayout {
                     if (!numberViews[x1][y1].isEmpty()&&!numberViews[x2][y2].isEmpty()){
                         isContinueLoop = false;
                     }
-                    countScore += numberViews[x1][y1].tryEat(numberViews[x2][y2]);
+                    countScore += tryEat(numberViews[x1][y1],numberViews[x2][y2]);
                     if(!isContinueLoop){
                         isContinueLoop = true;
                         continue label;
@@ -191,6 +191,20 @@ public class NumberLayout extends LinearLayout {
             }
         }
         return true;
+    }
+
+    public int tryEat(NumberView view1,NumberView view2){
+        int resultScore = 0;
+        if(view1.getValue() == 0){
+            view1.setValue(view2.getValue());
+            view2.clearValue();
+        }else if(view1.equals(view2)) {
+            view1.setValue(view1.getValue() + 1);
+            view2.clearValue();
+            return (int) Math.pow(2,view1.getValue());
+        }
+
+        return 0;
     }
 
 }
