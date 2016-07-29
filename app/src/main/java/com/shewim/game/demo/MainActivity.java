@@ -1,12 +1,9 @@
 package com.shewim.game.demo;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -15,7 +12,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity{
     private static final String SHARED_PREFERENCES_NAME = "com.shewim.2018.xml";
     private static final String SP_KEY_HISTORY_SCORE = "sp_key_history_score";
-    private GestureDetector detector;
     private NumberLayout numberLayout;
     private TextView mTextScore;
     private SharedPreferences mySharedPreferences;
